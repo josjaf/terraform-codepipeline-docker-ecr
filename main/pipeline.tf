@@ -142,7 +142,15 @@ resource "aws_codepipeline" "codepipeline" {
   }
 
 }
-
+resource "aws_ssm_parameter" "PipelineParameter" {
+  name = "${var.namespace}-pipeline"
+  type = "String"
+  value = aws_codepipeline.codepipeline.id
+  tags = {
+    Name = var.namespace
+    environment = var.namespace
+  }
+}
 
 
 
